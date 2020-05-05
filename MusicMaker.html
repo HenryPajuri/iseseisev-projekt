@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="app.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.6.10/Tone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.6.10/Tone.js.map"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./piano/piano.css" type="text/css" />
+    <link rel="stylesheet" href="style/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <title>MusicMaker</title>
+  </head>
+  <body>
+    <div class="app">
+      <h1>MusicMaker</h1>
+      <p>Make music to your taste</p>
+      <div class="drums">
+        <div class="kick">
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+        </div>
+        <div class="snare">
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+        </div>
+      </div>
+      <input class="button" type="button" id="bassSynth" onclick="song()" />
+
+      <div class="pads">
+        <div class="pad1">
+          <audio class="sound" src="./drums/kick-big.wav"></audio>
+        </div>
+        <div class="pad2">
+          <audio class="sound" src="drums/snare-punch.wav"></audio>
+        </div>
+      </div>
+      <p>Click the keys or use the keyboard to the play.</p>
+      <p>White keys: Q-P Black keys: 2-3 | 5-7 | 9-0</p>
+      <div class="piano">
+        <button class="white-key C4-key"></button>
+        <button class="black-key Db4-key"></button>
+        <button class="white-key D4-key"></button>
+        <button class="black-key Eb4-key"></button>
+        <button class="white-key E4-key"></button>
+        <button class="white-key F4-key"></button>
+        <button class="black-key Gb4-key"></button>
+        <button class="white-key G4-key"></button>
+        <button class="black-key Ab4-key"></button>
+        <button class="white-key A4-key"></button>
+        <button class="black-key Bb4-key"></button>
+        <button class="white-key B4-key"></button>
+        <button class="white-key C5-key"></button>
+        <button class="black-key Db5-key"></button>
+        <button class="white-key D5-key"></button>
+        <button class="black-key Eb5-key"></button>
+        <button class="white-key E5-key"></button>
+      </div>
+    </div>
+    <script src="./piano/piano.js"></script>
+  </body>
+</html>
