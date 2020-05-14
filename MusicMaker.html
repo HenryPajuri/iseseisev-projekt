@@ -3,15 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="app.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.6.10/Tone.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.6.10/Tone.js.map"></script>
-    <script
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.6.11/Tone.js"></script>-->
+    <script src="https://unpkg.com/tone"></script>
+
+    <!--<script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"
       integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
       crossorigin="anonymous"
+    ></script>-->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
     ></script>
+
     <link rel="stylesheet" href="./piano/piano.css" type="text/css" />
     <link rel="stylesheet" href="style/style.css" />
     <link
@@ -25,7 +31,7 @@
       <h1>MusicMaker</h1>
       <p>Make music to your taste</p>
       <div class="drums">
-        <div class="kick">
+        <div class="pattern"> 
           <input type="checkbox" />
           <input type="checkbox" />
           <input type="checkbox" />
@@ -35,7 +41,17 @@
           <input type="checkbox" />
           <input type="checkbox" />
         </div>
-        <div class="snare">
+        <div class="pattern">
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+          <input type="checkbox" />
+        </div>
+        <div class="pattern">
           <input type="checkbox" />
           <input type="checkbox" />
           <input type="checkbox" />
@@ -46,18 +62,49 @@
           <input type="checkbox" />
         </div>
       </div>
+
       <input class="button" type="button" id="bassSynth" onclick="song()" />
 
       <div class="pads">
-        <div class="pad1">
-          <audio class="sound" src="./drums/kick-big.wav"></audio>
+        <div class="kickPad">
+          <audio class="sound" src="./drums/kick-808.wav"></audio>
         </div>
-        <div class="pad2">
-          <audio class="sound" src="drums/snare-punch.wav"></audio>
+        <div class="snarePad">
+          <audio class="sound" src="drums/snare-808.wav"></audio>
+        </div>
+        <div class="hiHatPad">
+          <audio class="sound" src="drums/hihat-808.wav"></audio>
+        </div>
+        <div class="clapPad">
+          <audio class="sound" src="drums/clap-808.wav"></audio>
+        </div>
+        <div class="crashPad">
+          <audio class="sound" src="drums/crash-808.wav"></audio>
+        </div>
+        <div class="tomPad">
+          <audio class="sound" src="drums/tom-808.wav"></audio>
         </div>
       </div>
-      <p>Click the keys or use the keyboard to play the piano.</p>
-      <p>White keys: Q-P Black keys: 2-3 | 5-7 | 9-0</p>
+
+      <div class="metronomePlay" id="metronomePlay">
+        <input type="button" value="Play metronome" onclick="metronome()" />
+        <input id="stopMetronome" type="button" value="Stop metronome" onclick="stopSound()" />
+      </div>
+      <div class="metronomeValue" id="metronomeValue"></div>
+      <div class="metronomeChange" id="metronomeChange">
+        <label class="label" for="newMetronomeBpm"
+          >Here you can change the metronome's bpm</label
+        >
+        <input type="number" id="newMetronomeBpm" step="1" />
+        <input id="submit" type="button" value="Submit" onclick="changeMetronomeValue()" />
+      </div>
+      <p><button id="btnStart">START RECORDING</button><br/>
+        <button id="btnStop">STOP RECORDING</button></p>
+        
+      <div class="instructions">
+        <p>Click the keys or use the keyboard to play the piano.</p>
+        <p>White keys: Q-P Black keys: 2-3 | 5-7 | 9-0</p>
+      </div>
       <div class="piano">
         <button class="white-key C4-key"></button>
         <button class="black-key Db4-key"></button>
@@ -78,6 +125,11 @@
         <button class="white-key E5-key"></button>
       </div>
     </div>
+
+    <script src="app.js"></script>
     <script src="./piano/piano.js"></script>
+    <script src="mic_record.js"></script>
+    <!--<input type="button" onclick="playSynth()" />-->
+    <input type="button" onclick="metronomeKeyPressed()" />
   </body>
 </html>

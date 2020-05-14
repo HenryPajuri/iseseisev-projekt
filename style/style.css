@@ -1,10 +1,12 @@
 html {
   height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   font-family: "Montserrat", sans-serif;
-  background-image: linear-gradient(#403075, #882D61);
+  background-image: linear-gradient(#403075, #882d61);
 }
 
 .app {
@@ -27,34 +29,81 @@ header p {
 
 .pads {
   background: lightblue;
-  width: 100%;
+  /*width: 100%;*/
   display: flex;
   cursor: pointer;
+  flex-wrap: wrap;
+ 
 }
 
 .pads > div {
   height: 100px;
   width: 100px;
-  flex: 1;
 }
 
-/*.pads > div:hover {
-  background: black;
-}*/
+.pads > * {
+  flex: 1 1 160px;
+}
 
-.pad1 {
+.kickPad {
   background: #6600dd;
+  order: 2;
 }
 
-.pad1:hover {
+.kickPad:hover {
   background: #5b00c4;
 }
 
-.pad2 {
+.snarePad {
   background: #339b14;
+  order: 3;
 }
 
-.pad2:hover {
+.snarePad:hover {
   background: #2c8611;
 }
 
+.hiHatPad {
+  order: 4;
+  background: #9b8214;
+}
+
+.hiHatPad:hover {
+  background: #887211;
+}
+
+.clapPad {
+  order: 1;
+  background: #861506;
+}
+
+.clapPad:hover {
+  background: #751407;
+}
+
+.crashPad {
+  order: 5;
+  background: #7a066b;
+}
+
+.crashPad:hover {
+  background: #6b055e;
+}
+
+.tomPad {
+  order: 6;
+  background: #075583;
+}
+
+.tomPad:hover {
+  background: #064a72;
+}
+
+.instructions {
+  color: white;
+}
+
+.label {
+  color: white;
+  padding: 8px;
+}
