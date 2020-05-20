@@ -1,8 +1,3 @@
-html {
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-}
 
 body {
   font-family: "Montserrat", sans-serif;
@@ -17,6 +12,9 @@ body {
   align-items: center;
 }
 
+input[type="button"], input[type="submit"] { 
+  cursor: pointer;
+}
 header h1 {
   margin: 50px 0px 30px 0px;
   text-align: center;
@@ -33,7 +31,6 @@ header p {
   display: flex;
   cursor: pointer;
   flex-wrap: wrap;
- 
 }
 
 .pads > div {
@@ -46,35 +43,38 @@ header p {
 }
 
 .kickPad {
-  background: #6600dd;
+  background: #4b01a0;
   order: 2;
 }
 
 .kickPad:hover {
-  background: #5b00c4;
+  background: #5604b3;
 }
 
 .snarePad {
-  background: #339b14;
+  background: #01446b;
   order: 3;
 }
 
 .snarePad:hover {
-  background: #2c8611;
+  background: #013655;
+ 
 }
 
 .hiHatPad {
   order: 4;
-  background: #9b8214;
+  background: #07277c;
+  
 }
 
 .hiHatPad:hover {
-  background: #887211;
+  background: #051f64;
+ 
 }
 
 .clapPad {
   order: 1;
-  background: #861506;
+  background: #831a0c;
 }
 
 .clapPad:hover {
@@ -92,18 +92,41 @@ header p {
 
 .tomPad {
   order: 6;
-  background: #075583;
+  background: #750202;
 }
 
 .tomPad:hover {
-  background: #064a72;
+  background: #5f0202;
+
 }
 
 .instructions {
   color: white;
+
+  
 }
 
 .label {
   color: white;
   padding: 8px;
+}
+
+.guitar > div {
+ 
+  padding: 10px 20px;
+}
+
+.guitar > * {
+  flex: 1 1 160px;
+}
+
+
+#chordButton {
+  width: 60px;
+  height: 20px;
+  cursor: pointer;
+}
+
+#chordButton:hover {
+  background: #088a0e;
 }

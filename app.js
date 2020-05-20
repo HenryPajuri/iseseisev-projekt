@@ -1,12 +1,7 @@
-/*import Transport from 'Tone/core/Transport';
-import Volume from 'Tone/component/Volume';
-import Gain from 'Tone/component/Gain';
-import * as Tone from "tone";*/
 window.addEventListener("load", () => {
+  metronomeBpm = 120;
   // UPDATE: there is a problem in chrome with starting audio context
   //  before a user gesture. This fixes it.
-
-  metronomeBpm = 120;
   document.documentElement.addEventListener("mousedown", () => {
     if (Tone.context.state !== "running") Tone.context.resume();
   });
@@ -16,30 +11,33 @@ window.addEventListener("load", () => {
   $(function () {
     $("input[type='newMetronomeBpm']").prop("max", 2500);
   });
-
-  $("#metronomePlay").keypress(function (e) {
-    if (e.keyCode == 13) $("changeMetronomeValue").click();
-  });
 });
 
 //console.clear();
 
+var kick = new Tone.Player({
+  url:
+    "https://raw.githubusercontent.com/HenryPajuri/iseseisev-projekt/master/drums/kick-808.wav",
+}).toMaster();
+
+var snare = new Tone.Player({
+  url:
+    "https://raw.githubusercontent.com/HenryPajuri/iseseisev-projekt/master/drums/snare-808.wav",
+}).toMaster();
+
+var hiHat = new Tone.Player({
+  url:
+    "https://raw.githubusercontent.com/HenryPajuri/iseseisev-projekt/master/drums/hihat-808.wav",
+}).toMaster();
+const drums = [kick, snare, hiHat];
 function sequencer() {
-  const synths = [new Tone.Synth(), new Tone.Synth(), new Tone.Synth()];
-
-  synths[0].oscillator.type = "triangle";
-  synths[1].oscillator.type = "sine";
-  synths[2].oscillator.type = "square";
-
   const gain = new Tone.Gain(0.6);
   gain.toMaster();
 
-  synths.forEach((synth) => synth.connect(gain));
+  drums.forEach((drum) => drum.connect(gain));
 
-  const $rows = document.querySelectorAll(".pattern"),
-    notes = ["G2", "E2", "C2"];
+  const $rows = document.querySelectorAll(".pattern");
   let index = 0;
-
   Tone.Transport.scheduleRepeat(repeat, "8n");
   Tone.Transport.bpm.value = metronomeBpm;
   Tone.Transport.start();
@@ -47,53 +45,15 @@ function sequencer() {
   function repeat(time) {
     let step = index % 8;
     for (let i = 0; i < $rows.length; i++) {
-      let synth = synths[i],
-        note = notes[i],
+      let drum = drums[i],
         $row = $rows[i],
         $input = $row.querySelector(`input:nth-child(${step + 1})`);
-      if ($input.checked) synth.triggerAttackRelease(note, "8n", time);
+      if ($input.checked) drum.start(time);
     }
     index++;
   }
 }
-/*
-function playSynth() {
-  //create a synth and connect it to the master output (your speakers)
-  var synth = new Tone.Synth().toMaster();
 
-  //play a middle 'C' for the duration of an 8th note
-  Tone.Transport.scheduleRepeat(repeat, "8n");
-  Tone.Transport.bpm.value = metronomeBpm;
-  Tone.Transport.start();
-
-  function repeat(time) {
-    $input = document.querySelector(".metronome");
-    if ($input.checked) synth.triggerAttackRelease("C3", "8n", time);
-  }
-}
-*/
-/*function metronomeKeyPressed() {
-  elapsedTime = 0;
-  var synth = new Tone.Synth().toMaster();
-  var clock = new Tone.Clock(function (time) {
-    Tone.now();
-    elapsedTime = Tone.Transport.seconds;
-
-    new Tone.TransportRepeatEvent(synth, 1);
-    synth.triggerAttackRelease("C3", "8n");
-    Tone.Transport.TransportRepeatEvent(synth, 1);
-    console.log(time);
-    console.log(clock);
-    console.log(elapsedTime);
-  }, 1);
-
-  //Tone.now();
-  //elapsedTime = Tone.Transport.seconds;
-
-  //stop then start transport
-  //alert("keypressed");
-  //Tone.Transport.stop(clock).start(clock);
-}*/
 const sounds = document.querySelectorAll(".sound");
 const pads = document.querySelectorAll(".pads div");
 
@@ -149,11 +109,6 @@ window.addEventListener("keydown", ({ keyCode }) => {
   }
 });
 
-/*
-CODE THAT DOESN'T WORK
-
-----------------------------------------------------------------------------------------
-*/
 let loopBeat;
 let bassSynth;
 
@@ -162,13 +117,12 @@ function metronome() {
 
   var vol = new Tone.Volume(-100);
   bassSynth.chain(vol, Tone.Master);
- 
-  loopBeat = new Tone.Loop(sound, "4n");
 
+  loopBeat = new Tone.Loop(sound, "4n");
 
   Tone.Transport.bpm.value = metronomeBpm;
   Tone.Transport.start();
-  
+
   loopBeat.start(0);
   render();
 }
@@ -177,33 +131,33 @@ function sound(time) {
   bassSynth.triggerAttackRelease("c1", "8n", time);
   console.log(time);
 }
-function stopSound(){
+function stopSound() {
   loopBeat.stop(0);
 }
 function changeMetronomeValue() {
-  //var metronomeDiv = document.getElementById('metronomeValue');
   var newMetronomeValue = document.getElementById("newMetronomeBpm").value;
-  //metronomeDiv = newMetronomeValue;
+
   if (newMetronomeValue < 25000) {
     metronomeBpm = newMetronomeValue;
   } else {
-    alert("Maximum value for the metronome is 25000, otherwise stuff's gonna break :)");
+    alert(
+      "Maximum value for the metronome is 25000, otherwise stuff's gonna break :)"
+    );
   }
   render();
-
-  //metronomeDiv.setAttribute("value", "number");
-  //document.getElementById("newMetronomeBpm").value = "16";
-  //metronomeDiv.innerHTML.setAttribute(value, );
 }
 
 function render() {
   var metronomeDiv = document.getElementById("metronomeValue");
   metronomeDiv.innerHTML = metronomeBpm;
   Tone.Transport.bpm.value = metronomeBpm;
-
-  //playSynth();
 }
 
+/*
+CODE THAT DOESN'T WORK
+
+----------------------------------------------------------------------------------------
+*/
 /*
 -----------------------------------------------------------------------------------------
 
@@ -275,3 +229,98 @@ function sequencer() {
 }
 sequencer();
 */
+// Play the kick drum twice per second
+
+// Create a Player object and load the "kick.mp3" file
+
+// Connect the player output to the computer's audio output
+
+// Create a loop: call playBeat every half a second
+// Try other durations, like "1s" and "0.25s"
+
+// Audio playback loop
+/*
+function playKick() {
+  
+  var kickDrum = new Tone.Player("drums/kick-808.wav", function(){
+    //the player is now ready	
+  }).toMaster();
+  // Make sure the sound file has been completely loaded
+  
+  Tone.Transport.start();
+  if(kickDrum.loaded){
+  // Play sound file
+  kickDrum.start();}
+}
+
+*/
+/*
+function playKick() {
+  var kick = new Tone.Player({
+      url: "https://raw.githubusercontent.com/HenryPajuri/iseseisev-projekt/master/drums/kick-808.wav",
+      autostart: true
+  }).toMaster();
+
+  var snare = new Tone.Player({
+      url: "https://raw.githubusercontent.com/HenryPajuri/iseseisev-projekt/master/drums/snare-808.wav",
+      autostart: true
+  }).toMaster();
+
+  var hiHat = new Tone.Player({
+      url: "https://raw.githubusercontent.com/HenryPajuri/iseseisev-projekt/master/drums/hihat-808.wav",
+      autostart: true
+  }).toMaster();
+}
+
+
+  var kick = new Tone.Player({
+    url: "https://raw.githubusercontent.com/HenryPajuri/iseseisev-projekt/master/drums/kick-808.wav",
+   
+}).toMaster();
+
+function playKick() {
+    
+    kick.start();
+   
+  }
+  
+
+
+/*
+function playSynth() {
+  //create a synth and connect it to the master output (your speakers)
+  var synth = new Tone.Synth().toMaster();
+
+  //play a middle 'C' for the duration of an 8th note
+  Tone.Transport.scheduleRepeat(repeat, "8n");
+  Tone.Transport.bpm.value = metronomeBpm;
+  Tone.Transport.start();
+
+  function repeat(time) {
+    $input = document.querySelector(".metronome");
+    if ($input.checked) synth.triggerAttackRelease("C3", "8n", time);
+  }
+}
+*/
+/*function metronomeKeyPressed() {
+  elapsedTime = 0;
+  var synth = new Tone.Synth().toMaster();
+  var clock = new Tone.Clock(function (time) {
+    Tone.now();
+    elapsedTime = Tone.Transport.seconds;
+
+    new Tone.TransportRepeatEvent(synth, 1);
+    synth.triggerAttackRelease("C3", "8n");
+    Tone.Transport.TransportRepeatEvent(synth, 1);
+    console.log(time);
+    console.log(clock);
+    console.log(elapsedTime);
+  }, 1);
+
+  //Tone.now();
+  //elapsedTime = Tone.Transport.seconds;
+
+  //stop then start transport
+  //alert("keypressed");
+  //Tone.Transport.stop(clock).start(clock);
+}*/

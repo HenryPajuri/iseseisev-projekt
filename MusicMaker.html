@@ -29,8 +29,9 @@
   <body>
     <div class="app">
       <h1>MusicMaker</h1>
-      <p>Make music to your taste</p>
+      <p>Make music to your taste. You can use your keyboard or mouse to play sounds.</p>
       <div class="drums">
+        <label>kick</label>
         <div class="pattern"> 
           <input type="checkbox" />
           <input type="checkbox" />
@@ -41,6 +42,7 @@
           <input type="checkbox" />
           <input type="checkbox" />
         </div>
+        <label>snare</label>
         <div class="pattern">
           <input type="checkbox" />
           <input type="checkbox" />
@@ -51,6 +53,7 @@
           <input type="checkbox" />
           <input type="checkbox" />
         </div>
+        <label>Hihat</label>
         <div class="pattern">
           <input type="checkbox" />
           <input type="checkbox" />
@@ -63,7 +66,7 @@
         </div>
       </div>
 
-      <input class="button" type="button" id="bassSynth" onclick="song()" />
+   
 
       <div class="pads">
         <div class="kickPad">
@@ -98,14 +101,51 @@
         <input type="number" id="newMetronomeBpm" step="1" />
         <input id="submit" type="button" value="Submit" onclick="changeMetronomeValue()" />
       </div>
-      <p><button id="btnStart">START RECORDING</button><br/>
-        <button id="btnStop">STOP RECORDING</button></p>
+      <!--<p><button id="btnStart">START RECORDING</button><br/>
+        <button id="btnStop">STOP RECORDING</button></p>-->
         
-      <div class="instructions">
-        <p>Click the keys or use the keyboard to play the piano.</p>
-        <p>White keys: Q-P Black keys: 2-3 | 5-7 | 9-0</p>
+      
+      <div class="guitar">
+        <div class="Major">
+        <button id="chordButton" class="E4-Chord">E4</button>
+        <button id="chordButton" class="F4-Chord">F4</button>
+        <button id="chordButton" class="Gb4-Chord">Gb4</button>
+        <button id="chordButton" class="G4-Chord">G4</button>
+        <button id="chordButton" class="Ab4-Chord">Ab4</button>
+        <button id="chordButton" class="A4-Chord">A4</button>
+        <button id="chordButton" class="Bb4-Chord">Bb4</button>
+        <button id="chordButton" class="B4-Chord">B4</button>
+        <button id="chordButton" class="C5-Chord">C5</button>
+        <button id="chordButton" class="Db5-Chord">Db5</button>
+        <button id="chordButton" class="D5-Chord">D5</button>
+        <button id="chordButton" class="Eb5-Chord">Eb5</button>
+        <button id="chordButton" class="E5-Chord">E5</button>
       </div>
+      <div class="Minor">
+        <button id="chordButton" class="Em4-Chord">Em4</button>
+        <button id="chordButton" class="Fm4-Chord">Fm4</button>
+        <button id="chordButton" class="Gbm4-Chord">Gbm4</button>
+        <button id="chordButton" class="Gm4-Chord">Gm4</button>
+        <button id="chordButton" class="Abm4-Chord">Abm4</button>
+        <button id="chordButton" class="Am4-Chord">Am4</button>
+        <button id="chordButton" class="Bbm4-Chord">Bbm4</button>
+        <button id="chordButton" class="Bm4-Chord">Bm4</button>
+        <button id="chordButton" class="Cm5-Chord">Cm5</button>
+        <button id="chordButton" class="Dbm5-Chord">Dmb5</button>
+        <button id="chordButton" class="Dm5-Chord">Dm5</button>
+        <button id="chordButton" class="Ebm5-Chord">Ebm5</button>
+        <button id="chordButton" class="Em5-Chord">Em5</button>
+     
+      </div>
+     
+      </div>
+      <div >
+        <p></p>
+        <p></p>
+      </div>
+      <label class="instructions" for="piano">Click the keys or use the keyboard to play the piano.<br> White keys: Q-P Black keys: 2-3 | 5-7 | 9-0</label>
       <div class="piano">
+        
         <button class="white-key C4-key"></button>
         <button class="black-key Db4-key"></button>
         <button class="white-key D4-key"></button>
@@ -127,9 +167,10 @@
     </div>
 
     <script src="app.js"></script>
+    <script src="./Guitar/guitar.js"></script>
     <script src="./piano/piano.js"></script>
-    <script src="mic_record.js"></script>
-    <!--<input type="button" onclick="playSynth()" />-->
-    <input type="button" onclick="metronomeKeyPressed()" />
+    <!--<script src="mic_record.js"></script>
+    <input type="button" onclick="playSynth()" />-->
+  
   </body>
 </html>
