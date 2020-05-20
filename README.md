@@ -1,5 +1,5 @@
 # MusicMaker
-![Näidis](MusicMaker.JPEG)
+![Näidis](MusicMaker.JPG)
 Autor: Henry Pajuri
 
 Tegemist on programmiga, millega on võimalik muusikat teha. 
