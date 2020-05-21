@@ -12,5 +12,5 @@ Tegemist on programmiga, millega on võimalik muusikat teha. Iga heli tekitamise
 
 1. All on klaver. Selle tegemiseks kasutasin õpetust: https://www.youtube.com/watch?v=vjco5yKZpU8&t=915s. Selle õpetuse abil tegin ka kitarri osa programmist. Klaveri klahvide õpetus on saidil olemas.
 
-
+Saab proovida: http://www.tlu.ee/~shrimp/javascript%202/MusicMaker/Music%20Maker%20-%20Copy/MusicMaker.html
 
